@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import { getDistricts } from "udistricts";
 import "./dashboard.css";
-import Loader from  '../Loader/Spinner.js'
+import Loader from "../Loader/Spinner.js";
+import Search from '../Search/Search.js'
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      array: []
+      array: [],
+      search: ""
     };
   }
 
   componentDidMount() {
-    setTimeout( () => {this.checkForDistricts()}, 500);
+    setTimeout(() => {
+      this.checkForDistricts();
+    }, 2000);
   }
   checkForDistricts = async () => {
     return getDistricts
@@ -24,17 +28,21 @@ class Dashboard extends Component {
       .catch(error => console.log(error));
   };
 
+  updateSearch = (event) => {
+      this.setState({search: event.target.value.substr(0, 20)})
+  };
+
   render() {
-    const src = "https://placeimg.com/640/480/arch";
-    const { array } = this.state;
-    console.log(array, "statish");
+    const { array, search } = this.state;
+    let filteredDistricts = Search(array, search)
     return (
       <div>
         {array.length > 0 ? (
           <div className="cards">
             <p className="title sticky">Ugandan Districts</p>
+            <input type="text" value={search}  onChange={this.updateSearch}/>
             <ul className="container">
-              {array.map((district, i) => (
+              {filteredDistricts.map((district, i) => (
                 <li className="district" key={i}>
                   {district}
                 </li>
