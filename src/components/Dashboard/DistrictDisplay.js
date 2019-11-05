@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getDistricts } from "udistricts";
 import "./dashboard.css";
+import Loader from  '../Loader/Spinner.js'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.checkForDistricts();
+    setTimeout( () => {this.checkForDistricts()}, 9000);
   }
   checkForDistricts = async () => {
     return getDistricts
@@ -41,7 +42,7 @@ class Dashboard extends Component {
             </ul>
           </div>
         ) : (
-          <p>Loading....</p>
+          <Loader />
         )}
       </div>
     );
