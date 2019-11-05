@@ -12,7 +12,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    setTimeout( () => {this.checkForDistricts()}, 9000);
+    setTimeout( () => {this.checkForDistricts()}, 500);
   }
   checkForDistricts = async () => {
     return getDistricts
