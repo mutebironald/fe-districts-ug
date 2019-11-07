@@ -51,7 +51,8 @@ class Dashboard extends Component {
   deleteItem = event => {
     const { array } = this.state;
     const newArray = array.filter(
-      (d, key) => parseInt(event.target.value, 10) !== key
+      (d, key) => 
+          event.target.value !== d
     );
     this.setState({ array: [...newArray] });
   };
@@ -76,7 +77,7 @@ class Dashboard extends Component {
           {district}
           <button
             className="delete btn-danger"
-            value={index}
+            value={district}
             onClick={this.deleteItem}
           >
             Delete

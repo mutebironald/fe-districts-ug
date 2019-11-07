@@ -8,7 +8,11 @@ body {
   font-size: 20px;
   font-weight: 200;
   position: relative;
-  /* background: url('http://wes.io/hx9M/oh-la-la.jpg') center; */
+  /* background-color: rgba(0, 0, 0, 0.3); */
+}
+
+body::after {
+  background-image: url("http://wes.io/hx9M/oh-la-la.jpg") center;
 }
 
 .title {
@@ -67,20 +71,19 @@ body {
   padding-top: 102px;
 }
 
-
-.delete{
+.delete {
   /* display: flex; */
   align-items: flex-end;
   margin-left: 300px;
 }
 
-#page-numbers{
+#page-numbers {
   list-style-type: none;
   display: flex;
   justify-content: center;
 }
 
-#page-numbers > li{
+#page-numbers > li {
   padding: 12px;
   color: black;
   cursor: pointer;
@@ -90,24 +93,24 @@ body {
   border-radius: 12px;
 }
 
-.name{
+.name {
   justify-content: flex-end;
   margin-left: 746px;
-  margin-right:10px;
+  margin-right: 10px;
   border-radius: 6px;
 }
 
-.submit{
+.submit {
   border-radius: 6px;
 }
 
-.search{
+.search {
   justify-content: flex-start;
   margin-right: 10px;
   border-radius: 6px;
 }
 
-.criteria-boxes{
+.criteria-boxes {
   display: flex;
   flex-direction: row;
   margin: 2px 2px 2px 12px;
