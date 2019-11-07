@@ -4,6 +4,9 @@ import "./dashboard.css";
 import Loader from "../Loader/Spinner.js";
 import Search from "../Search/Search.js";
 
+import { Paginator } from "../Pagination/pagination.js";
+import { numberPages } from "../Pagination/pageNumbers.js";
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -11,9 +14,7 @@ class Dashboard extends Component {
       array: [],
       search: "",
       currentPage: 1,
-      perPage: 8,
-      class_value: "",
-      condition: false
+      perPage: 8
     };
   }
 
@@ -35,8 +36,7 @@ class Dashboard extends Component {
   handleClick = event => {
     this.setState(
       {
-        currentPage: Number(event.target.id),
-        condition: !this.state.condition
+        currentPage: Number(event.target.id)
       },
       () => {
         console.log(this.state, "statis");
@@ -71,7 +71,7 @@ class Dashboard extends Component {
     //to handle pagination
     const indexOfLastItem = currentPage * perPage;
     const indexOfFirstItem = indexOfLastItem - perPage;
-    console.log("last item index", indexOfLastItem, "first", indexOfFirstItem);
+    // console.log("last item index", indexOfLastItem, "first", indexOfFirstItem);
 
     const currentItems = filteredDistricts.slice(
       indexOfFirstItem,
@@ -93,24 +93,7 @@ class Dashboard extends Component {
       );
     });
 
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(array.length / perPage); i++) {
-      pageNumbers.push(i);
-    }
-
-    const renderPageNumbers = pageNumbers.map(number => {
-      return (
-        <li
-          key={number}
-          id={number}
-          className={number === this.state.currentPage ? "animated" : ""}
-          onClick={this.handleClick}
-        >
-          {number}
-        </li>
-      );
-    });
-
+    let pageNumbers = numberPages(perPage, array);
     //to display items.
     return (
       <div>
@@ -138,7 +121,9 @@ class Dashboard extends Component {
               </form>
             </div>
             <ul className="container">{renderItems}</ul>
-            <ul id="page-numbers">{renderPageNumbers}</ul>
+            <ul id="page-numbers">
+              {Paginator(pageNumbers, this.state.currentPage, this.handleClick)}
+            </ul>
           </div>
         ) : (
           <Loader />
