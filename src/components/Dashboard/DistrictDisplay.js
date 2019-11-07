@@ -37,22 +37,23 @@ class Dashboard extends Component {
   };
 
   updateSearch = event => {
-    this.setState({ search: event.target.value.substr(0, 20) });
+    this.setState({ search: event.target.value.substr(0, 20), currentPage: 1 });
   };
 
   addItem = event => {
     event.preventDefault();
     let name = this.refs.name.value;
-    if(!name)return;
+    if (!name) return;
     this.setState({ array: [name, ...this.state.array] });
     this.refs.name.value = "";
   };
 
-  deleteItem = i => {
+  deleteItem = event => {
     const { array } = this.state;
-    console.log(array.map(d => d !== i), "array");
-    // this.setState(prevState => ({array: prevState.array.filter(el => el !== i)}))
-    // this.refs.name.value='';
+    const newArray = array.filter(
+      (d, key) => parseInt(event.target.value, 10) !== key
+    );
+    this.setState({ array: [...newArray] });
   };
 
   render() {
@@ -73,7 +74,11 @@ class Dashboard extends Component {
       return (
         <li className="district" key={index}>
           {district}
-          <button className="delete btn-danger" onClick={this.deleteItem}>
+          <button
+            className="delete btn-danger"
+            value={index}
+            onClick={this.deleteItem}
+          >
             Delete
           </button>
         </li>
@@ -100,22 +105,24 @@ class Dashboard extends Component {
           <div className="cards">
             <p className="title sticky">Ugandan Districts</p>
             <div className="criteria-boxes">
-            <input
-              type="text"
-              value={search}
-              placeholder="Search"
-              className="search"
-              onChange={this.updateSearch}
-            />
-            <form onSubmit={this.addItem} className="submit-container">
               <input
                 type="text"
-                ref="name"
-                placeholder="Add item"
-                className="name"
+                value={search}
+                placeholder="Search"
+                className="search"
+                onChange={this.updateSearch}
               />
-              <button type="submit" className="submit">Add District</button>
-            </form>
+              <form onSubmit={this.addItem} className="submit-container">
+                <input
+                  type="text"
+                  ref="name"
+                  placeholder="Add item"
+                  className="name"
+                />
+                <button type="submit" className="submit">
+                  Add District
+                </button>
+              </form>
             </div>
             <ul className="container">{renderItems}</ul>
             <ul id="page-numbers">{renderPageNumbers}</ul>
