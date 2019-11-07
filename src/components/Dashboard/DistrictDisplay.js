@@ -11,7 +11,9 @@ class Dashboard extends Component {
       array: [],
       search: "",
       currentPage: 1,
-      perPage: 10
+      perPage: 8,
+      class_value: "",
+      condition: false
     };
   }
 
@@ -31,9 +33,15 @@ class Dashboard extends Component {
   };
 
   handleClick = event => {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
+    this.setState(
+      {
+        currentPage: Number(event.target.id),
+        condition: !this.state.condition
+      },
+      () => {
+        console.log(this.state, "statis");
+      }
+    );
   };
 
   updateSearch = event => {
@@ -50,10 +58,7 @@ class Dashboard extends Component {
 
   deleteItem = event => {
     const { array } = this.state;
-    const newArray = array.filter(
-      (d, key) => 
-          event.target.value !== d
-    );
+    const newArray = array.filter((d, key) => event.target.value !== d);
     this.setState({ array: [...newArray] });
   };
 
@@ -66,6 +71,8 @@ class Dashboard extends Component {
     //to handle pagination
     const indexOfLastItem = currentPage * perPage;
     const indexOfFirstItem = indexOfLastItem - perPage;
+    console.log("last item index", indexOfLastItem, "first", indexOfFirstItem);
+
     const currentItems = filteredDistricts.slice(
       indexOfFirstItem,
       indexOfLastItem
@@ -93,7 +100,12 @@ class Dashboard extends Component {
 
     const renderPageNumbers = pageNumbers.map(number => {
       return (
-        <li key={number} id={number} onClick={this.handleClick}>
+        <li
+          key={number}
+          id={number}
+          className={number === this.state.currentPage ? "animated" : ""}
+          onClick={this.handleClick}
+        >
           {number}
         </li>
       );
