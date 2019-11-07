@@ -43,6 +43,7 @@ class Dashboard extends Component {
   addItem = event => {
     event.preventDefault();
     let name = this.refs.name.value;
+    if(!name)return;
     this.setState({ array: [name, ...this.state.array] });
     this.refs.name.value = "";
   };
@@ -57,6 +58,7 @@ class Dashboard extends Component {
   render() {
     const { array, search, currentPage, perPage } = this.state;
 
+    //returns filtered districts array depending on search term.
     let filteredDistricts = Search(array, search);
 
     //to handle pagination
@@ -97,6 +99,7 @@ class Dashboard extends Component {
         {array.length > 0 ? (
           <div className="cards">
             <p className="title sticky">Ugandan Districts</p>
+            <div className="criteria-boxes">
             <input
               type="text"
               value={search}
@@ -104,15 +107,16 @@ class Dashboard extends Component {
               className="search"
               onChange={this.updateSearch}
             />
-            <form onSubmit={this.addItem}>
+            <form onSubmit={this.addItem} className="submit-container">
               <input
                 type="text"
                 ref="name"
                 placeholder="Add item"
                 className="name"
               />
-              <button type="submit">Add District</button>
+              <button type="submit" className="submit">Add District</button>
             </form>
+            </div>
             <ul className="container">{renderItems}</ul>
             <ul id="page-numbers">{renderPageNumbers}</ul>
           </div>

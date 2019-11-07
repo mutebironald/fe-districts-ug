@@ -74,16 +74,6 @@ body {
   margin-left: 300px;
 }
 
-.search{
-  display: flex;
-  justify-content: flex-start;
-}
-
-.name{
-  display: flex;
-  justify-content: flex-end;
-}
-
 #page-numbers{
   list-style-type: none;
   display: flex;
@@ -98,4 +88,27 @@ body {
   margin: 3px;
   user-select: none;
   border-radius: 12px;
+}
+
+.name{
+  justify-content: flex-end;
+  margin-left: 746px;
+  margin-right:10px;
+  border-radius: 6px;
+}
+
+.submit{
+  border-radius: 6px;
+}
+
+.search{
+  justify-content: flex-start;
+  margin-right: 10px;
+  border-radius: 6px;
+}
+
+.criteria-boxes{
+  display: flex;
+  flex-direction: row;
+  margin: 2px 2px 2px 12px;
 }
