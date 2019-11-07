@@ -66,3 +66,36 @@ body {
   position: fixed;
   padding-top: 102px;
 }
+
+
+.delete{
+  /* display: flex; */
+  align-items: flex-end;
+  margin-left: 300px;
+}
+
+.search{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.name{
+  display: flex;
+  justify-content: flex-end;
+}
+
+#page-numbers{
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+#page-numbers > li{
+  padding: 12px;
+  color: black;
+  cursor: pointer;
+  background-color: #efefef;
+  margin: 3px;
+  user-select: none;
+  border-radius: 12px;
+}
