@@ -1,6 +1,12 @@
-import React from 'react';
+import React from "react";
 
-export const Paginator = (pageNumbers, currentPage, handleClick) => pageNumbers.map(number => {
+//this paginator function will return page numbers. The arguments have been set to default values
+export const Paginator = (
+  pageNumbers = 10,
+  currentPage = 1,
+  handleClick = () => {}
+) =>
+  pageNumbers.map(number => {
     return (
       <li
         key={number}
