@@ -3,11 +3,10 @@ import { getDistricts } from "udistricts";
 import "./dashboard.css";
 import Loader from "../Loader/Spinner.js";
 import Search from "../Search/Search.js";
-
 import { Paginator } from "../Pagination/pagination.js";
 import { numberPages } from "../Pagination/pageNumbers.js";
 import { headerRender } from "../Header/Header.js";
-
+import { ListItems } from "../ListItems/list.js";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -79,20 +78,7 @@ class Dashboard extends Component {
       indexOfLastItem
     );
 
-    const renderItems = currentItems.map((district, index) => {
-      return (
-        <li className="district" key={index}>
-          {district}
-          <button
-            className="delete btn-danger"
-            value={district}
-            onClick={this.deleteItem}
-          >
-            Delete
-          </button>
-        </li>
-      );
-    });
+    const renderItems = ListItems(currentItems, this.deleteItem)
 
     let pageNumbers = numberPages(perPage, array);
     //to display items.
