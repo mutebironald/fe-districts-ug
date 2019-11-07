@@ -6,6 +6,7 @@ import Search from "../Search/Search.js";
 
 import { Paginator } from "../Pagination/pagination.js";
 import { numberPages } from "../Pagination/pageNumbers.js";
+import { headerRender } from "../Header/Header.js";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -100,26 +101,7 @@ class Dashboard extends Component {
         {array.length > 0 ? (
           <div className="cards">
             <p className="title sticky">Ugandan Districts</p>
-            <div className="criteria-boxes">
-              <input
-                type="text"
-                value={search}
-                placeholder="Search"
-                className="search"
-                onChange={this.updateSearch}
-              />
-              <form onSubmit={this.addItem} className="submit-container">
-                <input
-                  type="text"
-                  ref="name"
-                  placeholder="Add item"
-                  className="name"
-                />
-                <button type="submit" className="submit">
-                  Add District
-                </button>
-              </form>
-            </div>
+            {headerRender(search, this.updateSearch, this.addItem)}
             <ul className="container">{renderItems}</ul>
             <ul id="page-numbers">
               {Paginator(pageNumbers, this.state.currentPage, this.handleClick)}
